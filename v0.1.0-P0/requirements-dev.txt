@@ -1,0 +1,2 @@
+# P0 dev dependencies (Python 3.14, cp314)
+websockets>=17,<18

@@ -1,0 +1,6 @@
+{
+  "identifier": "default",
+  "description": "P0 minimal capability: core APIs only",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

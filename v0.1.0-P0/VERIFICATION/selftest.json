@@ -1,0 +1,31 @@
+{
+  "stage": "P0-sidecar-selftest",
+  "port": 46411,
+  "checks": [
+    {
+      "id": "E2a",
+      "item": "stdout handshake",
+      "pass": true,
+      "detail": "{\"port\": 46411, \"status\": \"ready\"}"
+    },
+    {
+      "id": "E3",
+      "item": "ping/pong rtt",
+      "pass": true,
+      "detail": "{'v': 1, 'id': 'm-1', 'type': 'pong', 'ts': 1794843619075, 'payload': {'echo': 123}}"
+    },
+    {
+      "id": "E4",
+      "item": "health payload",
+      "pass": true,
+      "detail": "{'status': 'ready', 'python_version': '3.14.8', 'platform': 'Windows-11-10.0.26300-SP0', 'cuda_available': False}"
+    },
+    {
+      "id": "E2b",
+      "item": "reject bad token",
+      "pass": true,
+      "detail": "close code 4001"
+    }
+  ],
+  "verdict": "ALL GREEN"
+}
