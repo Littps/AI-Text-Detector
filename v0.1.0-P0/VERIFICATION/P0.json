@@ -1,0 +1,63 @@
+{
+  "stage": "P0",
+  "date": "2026-11-16",
+  "environment": {
+    "rustc": "1.99.1",
+    "cargo": "1.99.1",
+    "tauri_cli": "2.12.4",
+    "git": "2.55.0",
+    "python_sidecar": "3.14.8 (PyManager, via .venv)",
+    "websockets": "17.4"
+  },
+  "gates": [
+    {
+      "id": "G1",
+      "item": "dev window pops, health lamp booting->ready",
+      "pass": true,
+      "detail": "cargo tauri dev: build 1m03s (342 crates), sidecar handshake instant after launch; user confirmed green lamp. Lamp timing measured from app start, build excluded per gate definition."
+    },
+    {
+      "id": "G2",
+      "item": "negative case: bad token rejected (close 4001)",
+      "pass": true,
+      "detail": "selftest E2b, close code 4001"
+    },
+    {
+      "id": "G3",
+      "item": "WS ping/pong RTT < 50ms",
+      "pass": true,
+      "detail": "selftest E3 loopback pong received, echo ts verified"
+    },
+    {
+      "id": "G4",
+      "item": "close shell -> zero python orphans",
+      "pass": true,
+      "detail": "survivors=0 after window close (shell/redirector/base all gone). Mechanism verified independently: killing venv redirector cascades to base interpreter (VERIFICATION/killchain-test.txt)."
+    },
+    {
+      "id": "G5",
+      "item": "main.rs <= 100 lines, server.py <= 150 lines",
+      "pass": true,
+      "detail": "main.rs = 100 lines (exactly at cap), server.py = 95 lines"
+    },
+    {
+      "id": "G6",
+      "item": "clean git history",
+      "pass": true,
+      "detail": "linear: initial LICENSE commit -> skeleton -> feat(v0.1.0-P0). Local-only follow-ups (gitattributes, dev.cmd fix, verification artifacts) pending commit approval."
+    },
+    {
+      "id": "G7",
+      "item": "torch 2.9.0+cu129 cp314 smoke (wheel cached, sm_120 probe)",
+      "pass": false,
+      "detail": "DEFERRED to P1 (allowed deferral, plan B4): 2.87GB download not yet started; wheel availability on official index already verified 2026-11-16."
+    }
+  ],
+  "verdict": "PASS (6/7 green, G7 torch smoke deferred to P1 by design)",
+  "artifacts": [
+    "preflight.json",
+    "selftest.json",
+    "killchain-test.txt",
+    "_sleep30.py (kill-chain probe script)"
+  ]
+}

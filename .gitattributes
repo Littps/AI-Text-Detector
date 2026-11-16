@@ -1,0 +1,27 @@
+# Normalize line endings: LF in repo, native on checkout
+* text=auto
+
+# Source files - always LF
+*.rs text
+*.py text
+*.js text
+*.css text
+*.html text
+*.json text
+*.toml text
+*.md text
+*.yml text
+*.yaml text
+
+# Windows-only
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary - never touch
+*.ico binary
+*.png binary
+*.jpg binary
+*.exe binary
+*.dll binary
+*.whl binary

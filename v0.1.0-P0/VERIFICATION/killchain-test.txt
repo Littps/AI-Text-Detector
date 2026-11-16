@@ -1,0 +1,29 @@
+# Kill-chain experiment: does killing the venv redirector orphan the base interpreter?
+
+## Background
+main.rs kill_sidecar() calls Child::kill() on the spawned python process.
+With a venv, that PID is the redirector; the real interpreter runs as its
+child. TerminateProcess does not cascade on Windows by default, so the
+question is whether the base interpreter survives as an orphan.
+
+## Method
+- Spawn `.venv\Scripts\python.exe _sleep30.py` via Start-Process
+- Enumerate children via Win32_Process (ParentProcessId)
+- Stop-Process (TerminateProcess) the redirector
+- Re-check children after 2s
+
+## Results (2026-11-16 23:5x, Python 3.14.8 venv)
+- Run 1 (INVALID): `-c` argument quoting broke, python exited instantly,
+  no child. Discarded.
+- Run 2 (VALID): redirector=69036, children=[72460,75252]
+  After redirector killed -> children gone. VERDICT: kill chain safe,
+  no orphan. (CPython 3.14 venv launcher cascades death to its children.)
+
+## Dev-run cross-check
+Full `cargo tauri dev` session: shell (52560) -> venv python (74052) ->
+base 3.14.8 (45536). After window close: survivors = 0. Consistent with
+the experiment.
+
+## Follow-up (P1)
+Release build without dev console should re-run this check once; the
+experiment above suggests it will hold.

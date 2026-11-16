@@ -76,7 +76,7 @@ async def handler(ws) -> None:
 
 async def amain() -> None:
     last_err = None
-    for _ in range(3):  # bind retry x3 (KICKOFF C5)
+    for _ in range(3):  # bind retry x3
         port = random.randint(20000, 60000)
         try:
             async with serve(handler, "127.0.0.1", port, max_size=32 * 1024 * 1024):

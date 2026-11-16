@@ -7,6 +7,7 @@ docs/WORKSPACE.md
 
 # ===== Rust / Tauri 产物 =====
 target/
+**/src-tauri/gen/
 
 # ===== Python =====
 __pycache__/
