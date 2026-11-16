@@ -11,5 +11,5 @@
     { "id": "PF-07", "item": "workspace-structure", "required": "7 subdirs per PLAN §4", "actual": "src-tauri/ui/backend/runtime/tests/scripts/VERIFICATION created", "pass": true }
   ],
   "verdict": "ALL GREEN",
-  "notes": "Python 3.14 chain (D10) and torch cp314 wheel (D11) previously verified 2026-11-16; network mirror strategy per D8."
+  "notes": "Python 3.14 toolchain and torch cp314 wheel availability previously verified locally on 2026-11-16; PyPI mirror and proxy fallback strategy documented in project setup."
 }
