@@ -1,0 +1,15 @@
+{
+  "stage": "P0-preflight",
+  "timestamp": "2026-11-16T23:25+08:00",
+  "checks": [
+    { "id": "PF-01", "item": "rustc", "required": "stable 1.9x", "actual": "rustc 1.99.1 (58cf8f9c3 2026-10-13)", "pass": true },
+    { "id": "PF-02", "item": "cargo", "required": "present", "actual": "cargo 1.99.1 (5f94df478 2026-08-27)", "pass": true },
+    { "id": "PF-03", "item": "tauri-cli", "required": "2.12.4 (installed anchor)", "actual": "tauri-cli 2.12.4", "pass": true },
+    { "id": "PF-04", "item": "git", "required": ">=2.40", "actual": "git version 2.55.0.windows.3", "pass": true },
+    { "id": "PF-05", "item": "pwsh7", "required": "7.x present", "actual": "7.6.10", "pass": true },
+    { "id": "PF-06", "item": "disk-free", "required": ">=10GB on C:", "actual": "379GB free (953G total, 61% used)", "pass": true },
+    { "id": "PF-07", "item": "workspace-structure", "required": "7 subdirs per PLAN §4", "actual": "src-tauri/ui/backend/runtime/tests/scripts/VERIFICATION created", "pass": true }
+  ],
+  "verdict": "ALL GREEN",
+  "notes": "Python 3.14 chain (D10) and torch cp314 wheel (D11) previously verified 2026-11-16; network mirror strategy per D8."
+}

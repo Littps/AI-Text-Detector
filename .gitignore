@@ -1,0 +1,27 @@
+# ===== 内部工程文档（D17：不入公开仓库）=====
+docs/DECISIONS.md
+docs/PLAN.md
+docs/ENV-AUDIT.md
+docs/P0-KICKOFF.md
+docs/WORKSPACE.md
+
+# ===== Rust / Tauri 产物 =====
+target/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ===== 大文件产物（构建脚本可重建，不入库）=====
+runtime/
+models/
+downloads/
+pip-cache/
+
+# ===== 杂项 =====
+*.log
+*.tmp
+Thumbs.db
+.DS_Store
