@@ -1,0 +1,12 @@
+# Runtime deps - P1 inference core (v0.2.0-P1)
+# Python 3.14 (cp314). torchvision is intentionally NOT listed (D11:
+# text detection needs zero image ops).
+
+# GPU build: install with
+#   pip install torch==2.9.0+cu129 --index-url https://download.pytorch.org/whl/cu129
+# (or install the cached wheel from downloads/ after SHA256 check)
+# CPU fallback for machines without an N-card (P1: automatic re-run path):
+#   pip install torch==2.9.0
+torch==2.9.0+cu129
+numpy==2.5.5
+websockets==17.4
