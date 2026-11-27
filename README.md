@@ -2,12 +2,15 @@
 
 本地多引擎 AI 生成文本检测工具——粘贴即测、下载透明、UI 认真。Windows 桌面应用，模型跑在自己机器上，文本不出电脑。
 
-## 功能特性
+> 开发中（内核已收口）：引擎加载、模型下载、全文高亮、模型管理均已可用，正在做最后的模型补全与界面打磨。
 
-- **多引擎检测**：中英文微调分类器 + 方法型引擎（GLTR 困惑度、Fast-DetectGPT、Binoculars）多路交叉验证
+## 特性
+
+- **多引擎交叉**：中英文微调分类器 + 方法型引擎（GLTR 已可用；Fast-DetectGPT、Binoculars 需大显存与额外权重下载）多路验证，句子取最高分、整篇取长度加权平均
 - **本地推理**：全部模型本地运行，无账号、无云端、无按次收费
-- **下载透明**：模型勾选制按需下载，前端进度 = 后台真实状态
-- **GPU 加速**：NVIDIA 显卡自动选型（CUDA），无卡机器自动回落 CPU
+- **下载透明**：模型勾选制按需下载，Range 断点续传 + SHA256 校验，前端进度 = 后台真实状态
+- **结果可读**：六档概率渐变的全文高亮、逐句引擎分数、整篇 AI 率汇总
+- **硬件自适应**：NVIDIA 显卡自动选型（CUDA），无卡机器回落 CPU；显存预算内 LRU 调度，重引擎独占运行
 
 ## 技术栈
 
@@ -15,21 +18,36 @@
 |---|---|
 | 桌面壳 | Tauri 2.x（Rust + WebView2） |
 | 推理后端 | Python 3.14 sidecar（独立进程） |
-| 深度学习 | PyTorch（CUDA / CPU 自适应） |
+| 深度学习 | PyTorch 2.9（CUDA / CPU 自适应） |
 | 通信 | WebSocket 数据通道 + 进程引导 |
+
+## 文档
+
+技术细节不在本页展开，按需查阅：
+
+- [架构设计](https://github.com/Littps/AI-Text-Detector/blob/main/docs/ARCHITECTURE.md)——进程模型、通信协议、检测流水线、资源与存储策略
+- [引擎目录](https://github.com/Littps/AI-Text-Detector/blob/main/docs/ENGINES.md)——每个引擎的类型、语言、体积、许可证与已知限制
+- [构建与开发](https://github.com/Littps/AI-Text-Detector/blob/main/docs/BUILD.md)——环境要求、开发启动、测试与打包
+
+## 快速开始
+
+前置：Windows 10/11 + WebView2、Python 3.14、Node 22、Rust（stable）。
+
+```bash
+git clone https://github.com/Littps/AI-Text-Detector.git
+cd AI-Text-Detector/v0.2.0-P1
+```
+
+依赖安装、开发启动、测试与打包命令见[构建与开发](https://github.com/Littps/AI-Text-Detector/blob/main/docs/BUILD.md)。首次启动会自动探测显卡并给出模型下载建议；也可以先在「模型管理」里按需勾选。
 
 ## 路线图
 
-- **P0 骨架**（进行中）：壳 + sidecar + WebSocket 链路 + 健康检查
-- **P1** 引擎加载器与模型下载器
-- **P2** 检测引擎接入
-- **P3** 结果可视化（分段高亮 / 引擎对比）
-- **P4** 打包分发
-- **P5** 打磨（托盘 / 热键 / 更新器）
-
-## 构建
-
-P0 收尾后补充构建说明。
+- **P0 骨架** ✅ 壳 + sidecar + WebSocket 链路 + 健康检查
+- **P1 推理核心** ✅ 引擎加载器 + 显存调度 + 七引擎验收
+- **P2 下载器** ✅ 硬件分档 + 勾选制下载 + 断点续传 / 校验 / 原子落盘
+- **P3 前端** ✅ 全文高亮 + 流式结果 + 模型管理与自定义模型库
+- **P4 打包分发** ⏳ 安装器 / 便携包 / SHA256 清单
+- **P5 打磨** ⏳ 托盘 / 热键 / 更新器 / 结果融合
 
 ## 发布物
 

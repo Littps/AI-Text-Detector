@@ -10,5 +10,14 @@ strict = false
 module = ["torch.*"]
 ignore_missing_imports = true
 
+# custom_models.py builds dynamic PreTrainedModel subclasses inside factory
+# functions against transformers 5.x's loosely-typed from_pretrained API;
+# static inference cannot follow it (config_class assignment, tuple-unpack
+# of from_pretrained, BaseModelOutput indexing). Runtime is pinned by the
+# probe instead - behaviour over types here.
+[[tool.mypy.overrides]]
+module = ["engines.custom_models", "engines.gpt2base"]
+ignore_errors = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]

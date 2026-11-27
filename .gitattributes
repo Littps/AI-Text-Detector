@@ -25,3 +25,5 @@
 *.exe binary
 *.dll binary
 *.whl binary
+*.pdf binary
+*.docx binary

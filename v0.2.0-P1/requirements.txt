@@ -10,3 +10,9 @@
 torch==2.9.0+cu129
 numpy==2.5.5
 websockets==17.4
+transformers==5.23.0
+tokenizers==0.23.3
+safetensors==0.8.0
+accelerate==1.16.0
+# D40 file import: pure-Python PDF text extraction (no binary wheel needed)
+pypdf==7.1.1

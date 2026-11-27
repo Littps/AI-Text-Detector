@@ -1,5 +1,5 @@
 {
-  "stage": "P1-progress (day 1)",
+  "stage": "P1-progress (day 1-2)",
   "date": "2026-11-17",
   "environment": {
     "python": "3.14.8 (PyManager venv)",
@@ -47,16 +47,26 @@
       "item": "bitsandbytes cp314 wheel check (D14 follow-up)",
       "pass": true,
       "detail": "0.49.0-0.50.2 all ship py3-none-win_amd64 wheels -> cp314 installable. Runtime sm_120 kernel compatibility deferred to P2 4bit live test."
+    },
+    {
+      "id": "P1-g",
+      "item": "FIRST REAL ENGINE END-TO-END (modernbert-raid-mage)",
+      "pass": true,
+      "detail": "transformers 5.23 ecosystem installed from official pypi.org (tokenizers/safetensors ship cp310-abi3 wheels = cp314-compatible, no dedicated cp314 needed). Weights 570MB pulled from huggingface.co via Clash 7897 proxy (session proxy bridge 65514 returns 502 for HF; 7897 fine), size 598439784 exact match. Smoke 4/4: LRU load 5.4s / 295MB vram (est 300MB), label direction confirmed via probes (ai=0.977 human=0.000, logits[:,1]=machine per README), sentence slicing with exact original-text offsets (3 AI sentences flagged 0.982/0.990/0.989, human untouched), model-level release 286MB. Residual: CUDA caching allocator keeps ~9MB bookkeeping with zero tensor objects (gc-walk verified) - acceptance standard is model-level release, not allocator zero. registry.verified flipped true."
     }
   ],
   "pending_for_P1_acceptance": [
-    "real engine implementations (weights arrive via P2 downloader or manual pull)",
-    "six-engine run on 5060 with sm_120 compute, VRAM peak <6.5GB, 3-engine detect <=2s",
-    "requirements: transformers/tokenizers/safetensors cp314 wheel availability check"
+    "remaining classifier engines (xiaoyu-zh / simpleai-zh / desklib-en / vanguard-en) - same RealClassifierEngine pattern, needs weights + per-repo label semantics",
+    "method engines gltr + fast-detectgpt (own implementations, no finetuned weights)",
+    "r1 language router weights + routing integration",
+    "six-engine run on 5060 with sm_120 compute, VRAM peak <6.5GB, 3-engine detect <=2s"
+  ],
+  "network_notes": [
+    "D18 (2026-11-17): official sources only - pypi.org / download.pytorch.org / huggingface.co; no mirrors configured, venv pip.ini removed from both versions"
   ],
   "infra_notes": [
     "background tasks stall network I/O in this environment (2nd occurrence: pip 8min at 0KB/s after cargo check 23min hang); mitigation = foreground curl -C - chunked resume (~1.8MB/s, 5 chunks)",
     "dev tools pip install also SIGTERM-killed when combined with other commands in one chain; run installs standalone"
   ],
-  "verdict": "DAY-1 PROGRESS GREEN (6/6), P1 acceptance pending real weights"
+  "verdict": "DAY-2 PROGRESS GREEN (7/7) - first real engine end-to-end; remaining engines are the same pattern"
 }

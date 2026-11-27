@@ -3,8 +3,9 @@ import pytest
 from engines.registry import ENGINE_SPECS, all_ids, spec, validate
 
 
-def test_nine_default_engines():
-    assert len(ENGINE_SPECS) == 9
+def test_catalogue_size_tracks_the_recommended_set():
+    # 9 since D14 -> 12 after the round-7 v3 trio (zhv3 / zhv3short / env3).
+    assert len(ENGINE_SPECS) == 12
 
 
 def test_unique_ids():

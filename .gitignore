@@ -3,23 +3,40 @@ docs/DECISIONS.md
 docs/PLAN.md
 docs/ENV-AUDIT.md
 docs/P0-KICKOFF.md
+docs/AUDIT-P2.md
+docs/MODEL-CANDIDATES-EVAL-2026-11-20.md
 docs/WORKSPACE.md
+# Developer-agent conversations and local acceptance screenshots contain
+# machine-specific paths; keep them local/private even if the source tree is
+# opened from a different checkout.
+Workbuddy-Sessions/
+v0.2.0-P1/VERIFICATION/
+VERIFICATION/
+.playwright-mcp/
+Admin-APPIcon/
+docs/refs/
 
 # ===== Rust / Tauri 产物 =====
 target/
+target-package/
+target-*/
 **/src-tauri/gen/
 
 # ===== Python =====
 __pycache__/
 *.py[cod]
+.coverage
 .venv/
 venv/
 
 # ===== 大文件产物（构建脚本可重建，不入库）=====
 runtime/
+runtime-base/
+backend-bundle/
 models/
 downloads/
 pip-cache/
+logs/
 
 # ===== 杂项 =====
 *.log
